@@ -71,6 +71,29 @@ flutter:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 
+  fonts:
+    - family: Righteous
+      fonts:
+        - asset: fonts/Righteous-Regular.ttf
+        - asset: fonts/Righteous-Regular.ttf
+          weight: 400
+
+    - family: Chewy
+      fonts:
+        - asset: fonts/Chewy-Regular.ttf
+        - asset: fonts/Chewy-Regular.ttf
+          weight: 400
+
+    - family: Daysone
+      fonts:
+        - asset: fonts/DaysOne-Regular.ttf
+        - asset: fonts/DaysOne-Regular.ttf
+          weight: 400
+
+  assets:
+    - imagens/capa.png
+    - imagens/mundo.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

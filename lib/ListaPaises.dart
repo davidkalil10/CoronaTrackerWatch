@@ -131,7 +131,7 @@ class _ListaPaisesState extends State<ListaPaises> {
 
 
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white, opacity: 1),
         backgroundColor: Color(0xff598747),
         title: Row(
@@ -164,24 +164,28 @@ class _ListaPaisesState extends State<ListaPaises> {
             ),
           ],
         ),
-      ),
+      ),*/
       body: Container(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(8),
-              child: TextField(
-                onChanged: (value){
-                  resultadoPesquisa(value);
-                },
-                controller: editingController,
-                decoration: InputDecoration(
-                  labelText: "Pesquisa",
-                  hintText: "Pesquisa",
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(25))
-                  )
+            Center(
+              child: Padding(
+                padding: EdgeInsets.only(left: 30,right: 30, top: 15),
+                child: TextField(
+                  onChanged: (value){
+                    resultadoPesquisa(value);
+                  },
+                  controller: editingController,
+                  decoration: InputDecoration(
+                      labelText: "Pesquisa",
+                      hintText: "Pesquisa",
+                      prefixIcon: Icon(Icons.search),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(25))
+                      )
+                  ),
                 ),
               ),
             ),
@@ -206,21 +210,21 @@ class _ListaPaisesState extends State<ListaPaises> {
                       title: Text(
                           itemsNew[indice].title,
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 15,
                             fontFamily: "Righteous",
                           )
                       ) ,
                       subtitle: Text(
                           itemsNew[indice].code,
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 12,
                             fontFamily: "Righteous",
                           )
                       ),
                     );
                   },
                   separatorBuilder: (context,indice) => Divider(
-                    height: 2,
+                    height: 1,
                     color: Colors.grey,
                   ),
                   itemCount: itemsNew.length

@@ -177,7 +177,7 @@ class _LinhadoTempoState extends State<LinhadoTempo> {
                 return Material(
                   child: Center(
                     child: AspectRatio(
-                        aspectRatio: (MediaQuery.of(context).size.height > MediaQuery.of(context).size.width? 1.7 : 2.5 ),
+                        aspectRatio: (MediaQuery.of(context).size.height > MediaQuery.of(context).size.width? 1.2 : 1.2 ),
                       child: Container(
                         decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(18)),
@@ -218,7 +218,7 @@ class _LinhadoTempoState extends State<LinhadoTempo> {
                               bubbleIndicatorValueFormat: intl.NumberFormat("###,##0", "pt_BR"), // formato numeros
                               verticalIndicatorStrokeWidth: 3.0,
                               verticalIndicatorColor: Colors.black26,
-                              pinchZoom: true,
+                              pinchZoom: false,
                               showVerticalIndicator: true,
                               verticalIndicatorFixedPosition: false,
                               backgroundColor: Colors.transparent,
@@ -243,12 +243,13 @@ class _LinhadoTempoState extends State<LinhadoTempo> {
                                 end: Alignment.bottomCenter,
                               ),*/
                               displayLinesXAxis: true,
-                              footerHeight: 60.0,
+                              startYAxisFromNonZeroValue: true,
+                              footerHeight: 50.0,
                               snap: false,
                               displayYAxis: false,
                               //stepsYAxis: 200,
-                              xAxisTextStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black87),
-                              yAxisTextStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black26),
+                              xAxisTextStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black87),
+                              yAxisTextStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black26),
                               //bubbleIndicatorColor: Color(0xff28B4C8), // cor da caixa de texto
                               bubbleIndicatorColor: Colors.white.withOpacity(0.9), // cor da caixa de texto
                               bubbleIndicatorLabelStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blueGrey,fontFamily: "Daysone",),

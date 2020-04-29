@@ -85,7 +85,8 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
     var d = DateFormat('HH:mm d/MM','pt_BR');
 
     setState(() {
-      nomePais = retorno["countrydata"][0]["info"]["title"].toString();
+      var texto = retorno["countrydata"][0]["info"]["title"].toString();
+      nomePais = texto.replaceFirst(RegExp(' '), "\n",0);
       totalCasos = f.format(retorno["countrydata"][0]["total_cases"]).toString();
       totalObitos = f.format(retorno["countrydata"][0]["total_deaths"]).toString();
       letalidade = f2.format( ((retorno["countrydata"][0]["total_deaths"]) / (retorno["countrydata"][0]["total_cases"]))*100).toString() + "%";
@@ -223,7 +224,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
   @override
   Widget build(BuildContext context) {
     Widget graficos = LinhadoTempo();
-    double fatorAjusteGrafico = (MediaQuery.of(context).size.height > MediaQuery.of(context).size.width? 0.27: 0.71 );
+    double fatorAjusteGrafico = (MediaQuery.of(context).size.height > MediaQuery.of(context).size.width? 0.68: 0.68 );
     //Widget graficos = Timeline();
     //Widget graficos = LinhadoTempo();
 
@@ -236,24 +237,16 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
         ),
         backgroundColor: Color(0xff598747),
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("CORONAVÍRUS",
+            Text("COVID\n TRACKER",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
+                fontSize: 12,
                 fontFamily: "Righteous",
               ),
             ),
             Icon(Icons.assessment),
-            Text("TRACKER",
-              style: TextStyle(
-                //fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                fontFamily: "Righteous",
-              ),
-            ),
           ],
         ),
       ),
@@ -272,7 +265,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                             "Última Atualização",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                              fontSize: 10,
                               fontFamily: "Righteous",
                               color: Color(0xffA6AEB7),
                             ),
@@ -281,7 +274,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                             horaAtualizacao,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 20,
+                              fontSize: 15,
                               fontFamily: "Daysone",
                             ),
                           )
@@ -291,69 +284,79 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                   ),
                   //Seleção do país
                   Padding(
-                    padding: EdgeInsets.only(top: 20,right: 20, left: 20,bottom: 5),
+                    padding: EdgeInsets.only(top: 10,right: 20, left: 20,bottom: 5),
                     child: Material(
                       color: Colors.white,
                       elevation: 14.0,
                       borderRadius: BorderRadius.circular(24),
                       shadowColor: Color(0x802196f3),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           Padding(
-                            padding: EdgeInsets.all(20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  "Selecione o país",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                    fontFamily: "Righteous",
+                            padding: EdgeInsets.only(top: 10,left: 20,right: 20,bottom: 10),
+                            child: Center(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: <Widget>[
+                                  Text(
+                                    "Selecione o país",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      fontFamily: "Righteous",
+                                    ),
                                   ),
-                                ),
-                                Material(
-                                  color: Colors.blue[50],
-                                  elevation: 5.0,
-                                  borderRadius: BorderRadius.all(Radius.circular(50)),
-                                  shadowColor: Color(0x802196f3),
-                                  child: FlatButton(
-                                      onPressed: (){
-                                        setState(() {
-                                          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=> ListaPaises()));
-                                          //dropdownValue = newValue;
-                                          //_atualizarCasos();
-                                        });
-
-                                      },
-                                      child: Row(
-                                        children: <Widget>[
-                                          Text(
-                                            _textoSalvo,
-                                            style: TextStyle(
-                                              fontSize: 40,
-                                              fontFamily: "Daysone",
-                                              color: Colors.blue[300],
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height/8,
+                                    width: MediaQuery.of(context).size.width*0.5,
+                                    child: Material(
+                                      color: Colors.blue[50],
+                                      elevation: 5.0,
+                                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                                      shadowColor: Color(0x802196f3),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(5),
+                                        child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: <Widget>[
+                                            FlatButton(
+                                              onPressed: (){
+                                                Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=> ListaPaises()));
+                                              },
+                                              child: Text(
+                                                _textoSalvo,
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontFamily: "Daysone",
+                                                  color: Colors.blue[300],
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                          Icon(FontAwesomeIcons.caretDown,color:Colors.blue[400])
-                                        ],
-                                      )
+                                            Icon(FontAwesomeIcons.caretDown,color:Colors.blue[400],size: 10,)
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                )
-                                ,
-                                Text(
-                                  nomePais,
-                                  style: TextStyle(
-                                    //fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    fontFamily: "Daysone",
-                                    color: Color(0xff59AA91),
-                                  ),
-                                )
-                              ],
+                                  Padding(
+                                      padding: EdgeInsets.only(top: 10),
+                                    child: Text(
+                                      nomePais,
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                        //fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                        fontFamily: "Daysone",
+                                        color: Color(0xff59AA91),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -371,18 +374,18 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                       shadowColor: Color(0x802196f3),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Padding(
-                            padding: EdgeInsets.all(20),
+                            padding: EdgeInsets.all(10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  "Casos Confirmados",
+                                  "Casos\nConfirmados",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 20,
+                                    fontSize: 15,
                                     fontFamily: "Righteous",
                                   ),
                                 ),
@@ -390,7 +393,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                   totalCasos,
                                   style: TextStyle(
                                     //fontWeight: FontWeight.bold,
-                                    fontSize: 35,
+                                    fontSize: 20,
                                     fontFamily: "Daysone",
                                     color: Color(0xff6978FC),
                                   ),
@@ -398,8 +401,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(right: 20),
+                          Center(
                             child: childBandeira,
                           )
                         ],
@@ -421,10 +423,10 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                             shadowColor: Color(0x802196f3),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Padding(
-                                  padding: EdgeInsets.all(20),
+                                  padding: EdgeInsets.all(10),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: <Widget>[
@@ -432,17 +434,19 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                         "Óbitos",
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 20,
+                                          fontSize: 15,
                                           fontFamily: "Righteous",
                                         ),
                                       ),
-                                      Text(
-                                        totalObitos,
-                                        style: TextStyle(
-                                          //fontWeight: FontWeight.bold,
-                                          fontSize: 28,
-                                          fontFamily: "Daysone",
-                                          color: Color(0xffE4B949),
+                                      Center(
+                                        child: Text(
+                                          totalObitos,
+                                          style: TextStyle(
+                                            //fontWeight: FontWeight.bold,
+                                            fontSize: 17,
+                                            fontFamily: "Daysone",
+                                            color: Color(0xffE4B949),
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -458,28 +462,30 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                             shadowColor: Color(0x802196f3),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Padding(
-                                  padding: EdgeInsets.all(20),
+                                  padding: EdgeInsets.all(10),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: <Widget>[
                                       Text(
                                         "Letalidade",
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 20,
+                                          fontSize: 15,
                                           fontFamily: "Righteous",
                                         ),
                                       ),
-                                      Text(
-                                        letalidade,
-                                        style: TextStyle(
-                                          //fontWeight: FontWeight.bold,
-                                          fontSize: 28,
-                                          fontFamily: "Daysone",
-                                          color: Color(0xffCD5075),
+                                      Center(
+                                        child: Text(
+                                          letalidade,
+                                          style: TextStyle(
+                                            //fontWeight: FontWeight.bold,
+                                            fontSize: 17,
+                                            fontFamily: "Daysone",
+                                            color: Color(0xffCD5075),
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -504,7 +510,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                         shadowColor: Color(0x802196f3),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             //Stack do titulo e dos botoes de controle
                             Stack(
@@ -512,49 +518,22 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                               children: <Widget>[
                                 Column(
                                   children: <Widget>[
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width,
-                                      height: (MediaQuery.of(context).size.width)/9,
-                                      child: Padding(
-                                        padding: EdgeInsets.only(top: 10,left: 10,right: 10),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: <Widget>[
-                                            /*IconButton(
-                                        icon: Icon(Icons.info_outline),
-                                        onPressed: (){},
-                                        tooltip: "Gire o celular para uma melhor experiência",
-                                      ),*/
-                                            Padding(
-                                              padding: EdgeInsets.only(left: 10,top: 0),
-                                              child: Text(
-                                                tituloGrafico,
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 20,
-                                                  fontFamily: "Righteous",
-                                                ),
-                                              ),
-                                            ),
-                                            IconButton(
-                                              icon: Icon(Icons.info_outline),
-                                              onPressed: (){},
-                                              tooltip: "Gire o celular para uma melhor experiência",
-                                            )
-                                            /*IconButton(
-                                        icon: Icon(Icons.info_outline),
-                                        onPressed: (){},
-                                        tooltip: "Fonte dos dados: TheVirusTracker.com",
-                                      )*/
-                                          ],
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 5,top: 10,right: 5),
+                                      child: Text(
+                                        tituloGrafico,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          fontFamily: "Righteous",
                                         ),
                                       ),
                                     ),
                                     SizedBox(
                                       width: MediaQuery.of(context).size.width,
-                                      height: 24,
+                                      height: MediaQuery.of(context).size.height/10,
                                       child: Padding(
-                                        padding: EdgeInsets.only(top: 00,left: 10,right: 10),
+                                        padding: EdgeInsets.only(top: 5,left: 10,right: 10),
                                         child: Row(
                                           crossAxisAlignment: CrossAxisAlignment.center,
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -585,45 +564,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                           Text(
                                                             value,
                                                             style: TextStyle(
-                                                              fontSize: 12,
-                                                              fontFamily: "Daysone",
-                                                              color: corGrafico.withOpacity(1.0),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    );
-                                                  }).toList(),
-                                                ),
-                                              ),
-                                            ),
-                                            //Segundo Filtro
-                                            Material(
-                                              color: corBotao,
-                                              elevation: 1.0,
-                                              borderRadius: BorderRadius.all(Radius.circular(50)),
-                                              shadowColor: Color(0x802196f3),
-                                              child: Padding(
-                                                padding: EdgeInsets.only(left: 10),
-                                                child: DropdownButton(
-                                                  value: dropdownAgrupamento,
-                                                  onChanged: (String newValue){
-                                                    setState(() {
-                                                      dropdownAgrupamento = newValue;
-                                                      _salvarReferencias();
-                                                    });
-                                                  },
-                                                  items: listaAgrupamento.map<DropdownMenuItem<String>>((String value2){
-                                                    return DropdownMenuItem<String>(
-                                                      value: value2,
-                                                      child: Row(
-                                                        mainAxisAlignment: MainAxisAlignment.center,
-                                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                                        children: <Widget>[
-                                                          Text(
-                                                            value2,
-                                                            style: TextStyle(
-                                                              fontSize: 12,
+                                                              fontSize: 9,
                                                               fontFamily: "Daysone",
                                                               color: corGrafico.withOpacity(1.0),
                                                             ),
@@ -661,7 +602,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                           Text(
                                                             value3,
                                                             style: TextStyle(
-                                                              fontSize: 12,
+                                                              fontSize: 9,
                                                               fontFamily: "Daysone",
                                                               color: corGrafico.withOpacity(1.0),
                                                             ),
@@ -672,7 +613,58 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                   }).toList(),
                                                 ),
                                               ),
-                                            )
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width,
+                                      height: MediaQuery.of(context).size.height/10,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(top: 5,left: 10,right: 10),
+                                        child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: <Widget>[
+                                            //Segundo Filtro
+                                            Material(
+                                              color: corBotao,
+                                              elevation: 1.0,
+                                              borderRadius: BorderRadius.all(Radius.circular(50)),
+                                              shadowColor: Color(0x802196f3),
+                                              child: Padding(
+                                                padding: EdgeInsets.only(left: 10),
+                                                child: DropdownButton(
+                                                  value: dropdownAgrupamento,
+                                                  onChanged: (String newValue){
+                                                    setState(() {
+                                                      dropdownAgrupamento = newValue;
+                                                      _salvarReferencias();
+                                                    });
+                                                  },
+                                                  items: listaAgrupamento.map<DropdownMenuItem<String>>((String value2){
+                                                    return DropdownMenuItem<String>(
+                                                      value: value2,
+                                                      child: Row(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                                        children: <Widget>[
+                                                          Text(
+                                                            value2,
+                                                            style: TextStyle(
+                                                              fontSize: 9,
+                                                              fontFamily: "Daysone",
+                                                              color: corGrafico.withOpacity(1.0),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    );
+                                                  }).toList(),
+                                                ),
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -682,17 +674,11 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                             ],
                             ),
                             //Stack do grafico
-                            Stack(
-                              alignment: Alignment.topCenter,
-                              children: <Widget>[
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: (MediaQuery.of(context).size.height*fatorAjusteGrafico),
-                                  //height: MediaQuery.of(context).size.height,
-                                  child: graficos,
-                                ),
-
-                              ],
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              height: (MediaQuery.of(context).size.height*fatorAjusteGrafico),
+                              //height: MediaQuery.of(context).size.height,
+                              child: graficos,
                             )
                           ],
                         ),
