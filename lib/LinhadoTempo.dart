@@ -158,6 +158,7 @@ class _LinhadoTempoState extends State<LinhadoTempo> {
 
   @override
   Widget build(BuildContext context) {
+    double _fatorProporcao = (MediaQuery.of(context).size.width / 227);
     //_recuperar();
     return FutureBuilder<bool>(
         future: _future,
@@ -248,8 +249,8 @@ class _LinhadoTempoState extends State<LinhadoTempo> {
                               snap: false,
                               displayYAxis: false,
                               //stepsYAxis: 200,
-                              xAxisTextStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black87),
-                              yAxisTextStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black26),
+                              xAxisTextStyle: TextStyle(fontSize: 8*_fatorProporcao, fontWeight: FontWeight.bold, color: Colors.black87),
+                              yAxisTextStyle: TextStyle(fontSize: 8*_fatorProporcao, fontWeight: FontWeight.bold, color: Colors.black26),
                               //bubbleIndicatorColor: Color(0xff28B4C8), // cor da caixa de texto
                               bubbleIndicatorColor: Colors.white.withOpacity(0.9), // cor da caixa de texto
                               bubbleIndicatorLabelStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blueGrey,fontFamily: "Daysone",),

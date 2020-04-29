@@ -128,7 +128,7 @@ class _ListaPaisesState extends State<ListaPaises> {
 
   @override
   Widget build(BuildContext context) {
-
+    double _fatorProporcao = (MediaQuery.of(context).size.width / 227);
 
     return Scaffold(
       /*appBar: AppBar(
@@ -210,14 +210,14 @@ class _ListaPaisesState extends State<ListaPaises> {
                       title: Text(
                           itemsNew[indice].title,
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 15*_fatorProporcao,
                             fontFamily: "Righteous",
                           )
                       ) ,
                       subtitle: Text(
                           itemsNew[indice].code,
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 12*_fatorProporcao,
                             fontFamily: "Righteous",
                           )
                       ),

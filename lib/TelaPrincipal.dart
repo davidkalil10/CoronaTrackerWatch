@@ -225,6 +225,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
   Widget build(BuildContext context) {
     Widget graficos = LinhadoTempo();
     double fatorAjusteGrafico = (MediaQuery.of(context).size.height > MediaQuery.of(context).size.width? 0.68: 0.68 );
+    double _fatorProporcao = (MediaQuery.of(context).size.width / 227);
     //Widget graficos = Timeline();
     //Widget graficos = LinhadoTempo();
 
@@ -242,7 +243,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
             Text("COVID\n TRACKER",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 12,
+                fontSize: 12*_fatorProporcao,
                 fontFamily: "Righteous",
               ),
             ),
@@ -265,7 +266,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                             "Última Atualização",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 10,
+                              fontSize: 10*_fatorProporcao,
                               fontFamily: "Righteous",
                               color: Color(0xffA6AEB7),
                             ),
@@ -274,7 +275,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                             horaAtualizacao,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                              fontSize: 15*_fatorProporcao,
                               fontFamily: "Daysone",
                             ),
                           )
@@ -305,7 +306,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                     "Selecione o país",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 15,
+                                      fontSize: 15*_fatorProporcao,
                                       fontFamily: "Righteous",
                                     ),
                                   ),
@@ -325,18 +326,20 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                           children: <Widget>[
                                             FlatButton(
                                               onPressed: (){
+                                                print("Minha altura é: " + MediaQuery.of(context).size.height.toString());
+                                                print("Minha Largura é: " + MediaQuery.of(context).size.width.toString());
                                                 Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=> ListaPaises()));
                                               },
                                               child: Text(
                                                 _textoSalvo,
                                                 style: TextStyle(
-                                                  fontSize: 15,
+                                                  fontSize: 15*_fatorProporcao,
                                                   fontFamily: "Daysone",
                                                   color: Colors.blue[300],
                                                 ),
                                               ),
                                             ),
-                                            Icon(FontAwesomeIcons.caretDown,color:Colors.blue[400],size: 10,)
+                                            Icon(FontAwesomeIcons.caretDown,color:Colors.blue[400],size: 10*_fatorProporcao,)
                                           ],
                                         ),
                                       ),
@@ -349,7 +352,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                       maxLines: 2,
                                       style: TextStyle(
                                         //fontWeight: FontWeight.bold,
-                                        fontSize: 15,
+                                        fontSize: 15*_fatorProporcao,
                                         fontFamily: "Daysone",
                                         color: Color(0xff59AA91),
                                       ),
@@ -385,7 +388,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                   "Casos\nConfirmados",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 15,
+                                    fontSize: 15*_fatorProporcao,
                                     fontFamily: "Righteous",
                                   ),
                                 ),
@@ -393,7 +396,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                   totalCasos,
                                   style: TextStyle(
                                     //fontWeight: FontWeight.bold,
-                                    fontSize: 20,
+                                    fontSize: 20*_fatorProporcao,
                                     fontFamily: "Daysone",
                                     color: Color(0xff6978FC),
                                   ),
@@ -434,7 +437,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                         "Óbitos",
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 15,
+                                          fontSize: 15*_fatorProporcao,
                                           fontFamily: "Righteous",
                                         ),
                                       ),
@@ -443,7 +446,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                           totalObitos,
                                           style: TextStyle(
                                             //fontWeight: FontWeight.bold,
-                                            fontSize: 17,
+                                            fontSize: 17*_fatorProporcao,
                                             fontFamily: "Daysone",
                                             color: Color(0xffE4B949),
                                           ),
@@ -473,7 +476,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                         "Letalidade",
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 15,
+                                          fontSize: 15*_fatorProporcao,
                                           fontFamily: "Righteous",
                                         ),
                                       ),
@@ -482,7 +485,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                           letalidade,
                                           style: TextStyle(
                                             //fontWeight: FontWeight.bold,
-                                            fontSize: 17,
+                                            fontSize: 17*_fatorProporcao,
                                             fontFamily: "Daysone",
                                             color: Color(0xffCD5075),
                                           ),
@@ -524,7 +527,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                         tituloGrafico,
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 15,
+                                          fontSize: 15*_fatorProporcao,
                                           fontFamily: "Righteous",
                                         ),
                                       ),
@@ -564,7 +567,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                           Text(
                                                             value,
                                                             style: TextStyle(
-                                                              fontSize: 9,
+                                                              fontSize: 8*_fatorProporcao,
                                                               fontFamily: "Daysone",
                                                               color: corGrafico.withOpacity(1.0),
                                                             ),
@@ -602,7 +605,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                           Text(
                                                             value3,
                                                             style: TextStyle(
-                                                              fontSize: 9,
+                                                              fontSize: 8*_fatorProporcao,
                                                               fontFamily: "Daysone",
                                                               color: corGrafico.withOpacity(1.0),
                                                             ),
@@ -653,7 +656,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                           Text(
                                                             value2,
                                                             style: TextStyle(
-                                                              fontSize: 9,
+                                                              fontSize: 8*_fatorProporcao,
                                                               fontFamily: "Daysone",
                                                               color: corGrafico.withOpacity(1.0),
                                                             ),
